@@ -6,12 +6,10 @@ using System.Reflection;
 using System;
 using UnityEngine;
 
-namespace ExamplePlugin
-{
+namespace PermaPings {
 
     [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
-    public class ExamplePlugin : BaseUnityPlugin
-    {
+    public class PermaPings : BaseUnityPlugin {
 
         public const string PluginGUID = "kyryh.permapings";
         public const string PluginName = "PermaPings";
@@ -25,17 +23,16 @@ namespace ExamplePlugin
 
             ConfigFile = Config;
 
-            Assembly assembly = Assembly.GetExecutingAssembly();
-
-            
 
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions")) {
                 AddConfigOptions();
             }
 
+            Hooks.Init();
 
             Logger.LogInfo($"Plugin {PluginGUID} is loaded!");
         }
+
 
         private void AddConfigOptions() {
             /*
