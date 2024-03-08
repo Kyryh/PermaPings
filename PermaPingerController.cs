@@ -9,7 +9,7 @@ using UnityEngine.Networking;
 
 namespace PermaPings {
     internal static class PermaPingerController {
-        private static List<PingerController.PingInfo> permapings = new();
+        public static List<PingerController.PingInfo> permapings = new();
         public static List<PingIndicator> permapingsIndicators = new();
         public static void AttemptPing(Ray aimRay, GameObject bodyObject, GameObject owner) {
             if (PingerController.GeneratePingInfo(aimRay, bodyObject, out var result) && result.targetNetworkIdentity != null) {
@@ -19,11 +19,7 @@ namespace PermaPings {
                     BuildPing(result, owner);
                 }
                 else {
-                    permapings.RemoveAt(i);
-                    if (permapingsIndicators[i] != null && permapingsIndicators[i].gameObject != null) {
-                        GameObject.Destroy(permapingsIndicators[i]?.gameObject);
-                    }
-                    permapingsIndicators.RemoveAt(i);
+                    RemovePing(i);
                 }
             }
         }
@@ -37,9 +33,15 @@ namespace PermaPings {
             pingIndicator.pingNormal = pingInfo.normal;
             pingIndicator.pingTarget = pingInfo.targetGameObject;
             pingIndicator.RebuildPing();
-            //pingIndicator.fixedTimer = float.PositiveInfinity;
             permapingsIndicators.Add(pingIndicator);
+        }
 
+        internal static void RemovePing(int index) {
+            permapings.RemoveAt(index);
+            if (permapingsIndicators[index] != null && permapingsIndicators[index].gameObject != null) {
+                GameObject.Destroy(permapingsIndicators[index]?.gameObject);
+            }
+            permapingsIndicators.RemoveAt(index);
         }
         internal static void ResetPings(Stage stage) {
             permapings = new();
