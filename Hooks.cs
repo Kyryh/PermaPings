@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
-using static RoR2.CharacterAI.BaseAI;
 
 namespace PermaPings {
     internal static class Hooks {
