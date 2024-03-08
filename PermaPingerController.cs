@@ -9,7 +9,7 @@ using UnityEngine.Networking;
 
 namespace PermaPings {
     internal static class PermaPingerController {
-        public static List<PingerController.PingInfo> permapings = new();
+        private static List<PingerController.PingInfo> permapings = new();
         public static List<PingIndicator> permapingsIndicators = new();
         public static void AttemptPing(Ray aimRay, GameObject bodyObject, GameObject owner) {
             if (PingerController.GeneratePingInfo(aimRay, bodyObject, out var result) && result.targetNetworkIdentity != null) {
@@ -33,7 +33,35 @@ namespace PermaPings {
             pingIndicator.pingNormal = pingInfo.normal;
             pingIndicator.pingTarget = pingInfo.targetGameObject;
             pingIndicator.RebuildPing();
+
+            pingIndicator.interactablePingGameObjects[0].transform.localScale *= 0.75f;
+            SpriteRenderer pingIcon = pingIndicator.interactablePingGameObjects[0].GetComponent<SpriteRenderer>();
+
+            Color pingColor = GetItemColor(pingInfo.targetGameObject) ?? pingIcon.color;
+            pingColor.a /= 2;
+
+            pingIcon.color = pingColor;
+
+            pingIndicator.pingText.fontSize *= 0.75f;
+            pingIndicator.pingText.alpha /= 2;
+
             permapingsIndicators.Add(pingIndicator);
+        }
+
+        private static Color? GetItemColor(GameObject interactable) {
+            GenericPickupController gpc;
+            if ((gpc = interactable.GetComponent<GenericPickupController>()) != null) {
+                return gpc.pickupIndex.GetPickupColor();
+            }
+            PickupPickerController ppc;
+            if ((ppc = interactable.GetComponent<PickupPickerController>()) != null) {
+                return ppc.options[0].pickupIndex.GetPickupColor();
+            }
+            ShopTerminalBehavior stb;
+            if ((stb = interactable.GetComponent<ShopTerminalBehavior>()) != null) {
+                return stb.CurrentPickupIndex().GetPickupColor();
+            }
+            return null;
         }
 
         internal static void RemovePing(int index) {
