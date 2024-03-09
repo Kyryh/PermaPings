@@ -54,7 +54,7 @@ namespace PermaPings {
                 return gpc.pickupIndex.GetPickupColor();
             }
             PickupPickerController ppc;
-            if ((ppc = interactable.GetComponent<PickupPickerController>()) != null) {
+            if (interactable.GetComponent<ScrapperController>() == null && (ppc = interactable.GetComponent<PickupPickerController>()) != null) {
                 return ppc.options[0].pickupIndex.GetPickupColor();
             }
             ShopTerminalBehavior stb;
