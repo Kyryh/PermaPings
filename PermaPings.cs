@@ -5,23 +5,22 @@ using System.IO;
 using System.Reflection;
 using System;
 using UnityEngine;
+using RiskOfOptions;
 
 namespace PermaPings {
 
     [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
+    [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
     public class PermaPings : BaseUnityPlugin {
 
         public const string PluginGUID = "kyryh.permapings";
         public const string PluginName = "PermaPings";
         public const string PluginVersion = "1.0.0";
         public static BepInEx.Logging.ManualLogSource Log { get; private set; }
-        public static BepInEx.Configuration.ConfigFile ConfigFile { get; private set; }
 
 
         private void Awake() {
             Log = Logger;
-
-            ConfigFile = Config;
 
 
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions")) {
