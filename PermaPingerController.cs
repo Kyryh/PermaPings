@@ -34,21 +34,24 @@ namespace PermaPings {
             pingIndicator.pingTarget = pingInfo.targetGameObject;
             pingIndicator.RebuildPing();
 
-            pingIndicator.interactablePingGameObjects[0].transform.localScale *= 0.75f;
+            pingIndicator.interactablePingGameObjects[0].transform.localScale *= PermaPingsConfig.permaPingSize.Value/100;
             SpriteRenderer pingIcon = pingIndicator.interactablePingGameObjects[0].GetComponent<SpriteRenderer>();
 
             Color pingColor = GetItemColor(pingInfo.targetGameObject) ?? pingIcon.color;
-            pingColor.a /= 2;
+            
+            pingColor.a *= PermaPingsConfig.permaPingAlpha.Value/100;
 
             pingIcon.color = pingColor;
 
-            pingIndicator.pingText.fontSize *= 0.75f;
-            pingIndicator.pingText.alpha /= 2;
+            pingIndicator.pingText.fontSize *= PermaPingsConfig.permaPingSize.Value/100;
+            pingIndicator.pingText.alpha *= PermaPingsConfig.permaPingAlpha.Value/100;
 
             permapingsIndicators.Add(pingIndicator);
         }
 
         private static Color? GetItemColor(GameObject interactable) {
+            if (!PermaPingsConfig.permaPingItemTierColor.Value)
+                return null;
             GenericPickupController gpc;
             if ((gpc = interactable.GetComponent<GenericPickupController>()) != null) {
                 return gpc.pickupIndex.GetPickupColor();
