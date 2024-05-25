@@ -4,6 +4,7 @@ using RiskOfOptions.OptionConfigs;
 using RiskOfOptions.Options;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 using UnityEngine;
 
@@ -71,6 +72,7 @@ namespace PermaPings {
             }
         }
 
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private static void AddConfigOptions() {
             ModSettingsManager.AddOption(new KeyBindOption(permaPingKey));
 
