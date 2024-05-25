@@ -11,14 +11,9 @@
   <ItemGroup>
 	  <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
 	  <PackageReference Include="BepInEx.PluginInfoProps" Version="1.1.0" />
-	  <PackageReference Include="R2API.ContentManagement" Version="1.0.3" />
+	  <PackageReference Include="R2API.ContentManagement" Version="1.0.4" />
+	  <PackageReference Include="Rune580.Mods.RiskOfRain2.RiskOfOptions" Version="2.8.0" />
 	  <PackageReference Include="UnityEngine.Modules" Version="2019.4.26" IncludeAssets="compile" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="RiskOfOptions">
-      <HintPath>D:\Games\SteamLibrary\steamapps\common\Risk of Rain 2\BepInEx\plugins\RiskOfOptions\RiskOfOptions.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 
