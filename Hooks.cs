@@ -35,7 +35,7 @@ namespace PermaPings {
 
         private static void PlayerCharacterMasterController_Update(On.RoR2.PlayerCharacterMasterController.orig_Update orig, PlayerCharacterMasterController self) {
             orig(self);
-            if (self.hasEffectiveAuthority && self.bodyInputs && self.body && PermaPingsConfig.permaPingKey.Value.IsDown())
+            if (self.hasEffectiveAuthority && self.bodyInputs && self.body && PermaPingsConfig.GetPermaPingKeyDown())
                 PermaPingerController.AttemptPing(new Ray(self.bodyInputs.aimOrigin, self.bodyInputs.aimDirection), self.body.gameObject, self.gameObject);
         }
     }

@@ -1,4 +1,5 @@
-﻿using BepInEx.Configuration;
+﻿using BepInEx;
+using BepInEx.Configuration;
 using RiskOfOptions;
 using RiskOfOptions.OptionConfigs;
 using RiskOfOptions.Options;
@@ -70,6 +71,10 @@ namespace PermaPings {
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions")) {
                 AddConfigOptions();
             }
+        }
+
+        public static bool GetPermaPingKeyDown() {
+            return UnityInput.Current.GetKeyDown(permaPingKey.Value.MainKey);
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
