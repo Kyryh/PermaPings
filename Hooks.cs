@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Networking;
+using MonoMod.RuntimeDetour.HookGen;
+using R2API.Utils;
 
 namespace PermaPings {
     internal static class Hooks {
@@ -11,8 +14,19 @@ namespace PermaPings {
             On.RoR2.PlayerCharacterMasterController.Update += PlayerCharacterMasterController_Update;
             Stage.onServerStageComplete += PermaPingerController.ResetPings;
             On.RoR2.UI.PingIndicator.Update += PingIndicator_Update;
+
+            var isPingableProperty = typeof(NetworkIdentity).GetPropertySetter("isPingable");
+
+            HookEndpointManager.Add(isPingableProperty, NetworkIdentity_set_isPingable);
+                
         }
         
+        private static void NetworkIdentity_set_isPingable(Action<NetworkIdentity, bool> orig, NetworkIdentity self, bool value) {
+            orig(self, value);
+            if (!value) {
+                PermaPingerController.AttemptRemovePing(self);
+            }
+        }
         private static void PingIndicator_Update(On.RoR2.UI.PingIndicator.orig_Update orig, PingIndicator self) {
             if (!PermaPingerController.permapingsIndicators.Contains(self)) {
                 orig(self);

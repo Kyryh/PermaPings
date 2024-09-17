@@ -24,6 +24,12 @@ namespace PermaPings {
             }
         }
 
+        public static void AttemptRemovePing(NetworkIdentity networkIdentity) {
+            int i = permapings.FindIndex(permaping => permaping.targetNetworkIdentity == networkIdentity);
+            if (i != -1)
+                RemovePing(i);
+        }
+
 
         private static void BuildPing(PingerController.PingInfo pingInfo, GameObject owner) {
             GameObject gameObject = GameObject.Instantiate(LegacyResourcesAPI.Load<GameObject>("Prefabs/PingIndicator"));
