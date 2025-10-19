@@ -17,8 +17,7 @@ namespace PermaPings {
                 if (i == -1) {
                     permapings.Add(result);
                     BuildPing(result, owner);
-                }
-                else {
+                } else {
                     RemovePing(i);
                 }
             }
@@ -40,17 +39,17 @@ namespace PermaPings {
             pingIndicator.pingTarget = pingInfo.targetGameObject;
             pingIndicator.RebuildPing();
 
-            pingIndicator.interactablePingGameObjects[0].transform.localScale *= PermaPingsConfig.permaPingSize.Value/100;
+            pingIndicator.interactablePingGameObjects[0].transform.localScale *= PermaPingsConfig.permaPingSize.Value / 100;
             SpriteRenderer pingIcon = pingIndicator.interactablePingGameObjects[0].GetComponent<SpriteRenderer>();
 
             Color pingColor = GetItemColor(pingInfo.targetGameObject) ?? pingIcon.color;
-            
-            pingColor.a *= PermaPingsConfig.permaPingAlpha.Value/100;
+
+            pingColor.a *= PermaPingsConfig.permaPingAlpha.Value / 100;
 
             pingIcon.color = pingColor;
 
-            pingIndicator.pingText.fontSize *= PermaPingsConfig.permaPingSize.Value/100;
-            pingIndicator.pingText.alpha *= PermaPingsConfig.permaPingAlpha.Value/100;
+            pingIndicator.pingText.fontSize *= PermaPingsConfig.permaPingSize.Value / 100;
+            pingIndicator.pingText.alpha *= PermaPingsConfig.permaPingAlpha.Value / 100;
 
             permapingsIndicators.Add(pingIndicator);
         }

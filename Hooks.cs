@@ -18,9 +18,9 @@ namespace PermaPings {
             var isPingableProperty = typeof(NetworkIdentity).GetPropertySetter("isPingable");
 
             HookEndpointManager.Add(isPingableProperty, NetworkIdentity_set_isPingable);
-                
+
         }
-        
+
         private static void NetworkIdentity_set_isPingable(Action<NetworkIdentity, bool> orig, NetworkIdentity self, bool value) {
             orig(self, value);
             if (!value) {

@@ -35,7 +35,7 @@ namespace PermaPings {
                 "Visuals",
                 "PermaPingAlpha",
                 50f,
-                "Alpha value of the perma-ping icon, i.e. how opaque it is\n" + 
+                "Alpha value of the perma-ping icon, i.e. how opaque it is\n" +
                 "100 means it's completely visible, 0 means it's completely transparent"
             );
 
@@ -81,8 +81,8 @@ namespace PermaPings {
         private static void AddConfigOptions() {
             ModSettingsManager.AddOption(new KeyBindOption(permaPingKey));
 
-            ModSettingsManager.AddOption(new SliderOption(permaPingAlpha, new SliderConfig() { min = 0, max = 100}));
-            ModSettingsManager.AddOption(new SliderOption(permaPingSize, new SliderConfig() { min = 0, max = 100}));
+            ModSettingsManager.AddOption(new SliderOption(permaPingAlpha, new SliderConfig() { min = 0, max = 100 }));
+            ModSettingsManager.AddOption(new SliderOption(permaPingSize, new SliderConfig() { min = 0, max = 100 }));
             ModSettingsManager.AddOption(new CheckBoxOption(permaPingItemTierColor));
 
             //ModSettingsManager.AddOption(new CheckBoxOption(allowScannerPermaPings));

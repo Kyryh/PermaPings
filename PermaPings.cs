@@ -16,7 +16,9 @@ namespace PermaPings {
         public const string PluginGUID = "kyryh.permapings";
         public const string PluginName = "PermaPings";
         public const string PluginVersion = "1.0.0";
-        public static BepInEx.Logging.ManualLogSource Log { get; private set; }
+        public static BepInEx.Logging.ManualLogSource Log {
+            get; private set;
+        }
 
 
         private void Awake() {
