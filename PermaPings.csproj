@@ -11,7 +11,7 @@
 	<ItemGroup>
 		<PackageReference Include="BepInEx.Analyzers" Version="1.0.8" PrivateAssets="all" />
 		<PackageReference Include="BepInEx.PluginInfoProps" Version="2.1.0" />
-		<PackageReference Include="R2API.ContentManagement" Version="1.0.6" />
+		<PackageReference Include="R2API.Core" Version="5.1.1" />
 		<PackageReference Include="Rune580.Mods.RiskOfRain2.RiskOfOptions" Version="2.8.2" />
 		<PackageReference Include="UnityEngine.Modules" Version="2021.3.33" IncludeAssets="compile" />
 	</ItemGroup>
