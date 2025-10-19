@@ -6,6 +6,7 @@
 		<Version>1.0.0</Version>
 		<LangVersion>latest</LangVersion>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<GamePath>D:\Games\SteamLibrary\steamapps\common\Risk of Rain 2</GamePath>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -18,6 +19,6 @@
 
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Command="xcopy /y &quot;bin\Debug\netstandard2.1\PermaPings.dll&quot; &quot;Mod\BepInEx\plugins\&quot;&#xD;&#xA;xcopy /y &quot;bin\Debug\netstandard2.1\PermaPings.dll&quot; &quot;D:\Games\SteamLibrary\steamapps\common\Risk of Rain 2\BepInEx\plugins\&quot;&#xD;&#xA;&#xD;&#xA;start steam://rungameid/632360" />
+		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(GamePath)\BepInEx\plugins\" />
 	</Target>
 </Project>
