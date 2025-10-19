@@ -39,14 +39,17 @@ namespace PermaPings {
             pingIndicator.pingTarget = pingInfo.targetGameObject;
             pingIndicator.RebuildPing();
 
-            pingIndicator.interactablePingGameObjects[0].transform.localScale *= PermaPingsConfig.permaPingSize.Value / 100;
-            SpriteRenderer pingIcon = pingIndicator.interactablePingGameObjects[0].GetComponent<SpriteRenderer>();
+            Transform pingIcons = pingIndicator.interactablePingGameObjects[0].transform.parent;
+            pingIcons.localScale *= PermaPingsConfig.permaPingSize.Value / 100;
 
-            Color pingColor = GetItemColor(pingInfo.targetGameObject) ?? pingIcon.color;
+            Color? pingColor = GetItemColor(pingInfo.targetGameObject);
 
-            pingColor.a *= PermaPingsConfig.permaPingAlpha.Value / 100;
 
-            pingIcon.color = pingColor;
+            foreach (var pingIcon in pingIcons.GetComponentsInChildren<SpriteRenderer>()) {
+                var color = pingColor ?? pingIcon.color;
+                color.a *= PermaPingsConfig.permaPingAlpha.Value / 100;
+                pingIcon.color = color;
+            }
 
             pingIndicator.pingText.fontSize *= PermaPingsConfig.permaPingSize.Value / 100;
             pingIndicator.pingText.alpha *= PermaPingsConfig.permaPingAlpha.Value / 100;
