@@ -61,13 +61,13 @@ namespace PermaPings {
             if (!PermaPingsConfig.permaPingItemTierColor.Value)
                 return null;
             if (interactable.TryGetComponent<GenericPickupController>(out var gpc)) {
-                return gpc.pickupIndex.pickupDef.baseColor;
+                return gpc.pickup.pickupIndex.pickupDef.baseColor;
             }
             if (interactable.GetComponent<ScrapperController>() == null && interactable.TryGetComponent<PickupPickerController>(out var ppc) && ppc.options.Length > 0) {
-                return ppc.options[0].pickupIndex.pickupDef.baseColor;
+                return ppc.options[0].pickup.pickupIndex.pickupDef.baseColor;
             }
             if (interactable.TryGetComponent<ShopTerminalBehavior>(out var stb)) {
-                return stb.CurrentPickupIndex().pickupDef.baseColor;
+                return stb.CurrentPickup().pickupIndex.pickupDef.baseColor;
             }
             return null;
         }
