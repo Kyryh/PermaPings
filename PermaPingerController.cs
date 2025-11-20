@@ -60,17 +60,14 @@ namespace PermaPings {
         private static Color? GetItemColor(GameObject interactable) {
             if (!PermaPingsConfig.permaPingItemTierColor.Value)
                 return null;
-            GenericPickupController gpc;
-            if ((gpc = interactable.GetComponent<GenericPickupController>()) != null) {
-                return gpc.pickupIndex.GetPickupColor();
+            if (interactable.TryGetComponent<GenericPickupController>(out var gpc)) {
+                return gpc.pickupIndex.pickupDef.baseColor;
             }
-            PickupPickerController ppc;
-            if (interactable.GetComponent<ScrapperController>() == null && (ppc = interactable.GetComponent<PickupPickerController>()) != null && ppc.options.Length > 0) {
-                return ppc.options[0].pickupIndex.GetPickupColor();
+            if (interactable.GetComponent<ScrapperController>() == null && interactable.TryGetComponent<PickupPickerController>(out var ppc) && ppc.options.Length > 0) {
+                return ppc.options[0].pickupIndex.pickupDef.baseColor;
             }
-            ShopTerminalBehavior stb;
-            if ((stb = interactable.GetComponent<ShopTerminalBehavior>()) != null) {
-                return stb.CurrentPickupIndex().GetPickupColor();
+            if (interactable.TryGetComponent<ShopTerminalBehavior>(out var stb)) {
+                return stb.CurrentPickupIndex().pickupDef.baseColor;
             }
             return null;
         }
