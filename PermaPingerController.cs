@@ -38,6 +38,7 @@ namespace PermaPings {
             pingIndicator.pingNormal = pingInfo.normal;
             pingIndicator.pingTarget = pingInfo.targetGameObject;
             pingIndicator.RebuildPing();
+            pingIndicator.fixedTimer = float.PositiveInfinity;
 
             Transform pingIcons = pingIndicator.interactablePingGameObjects[0].transform.parent;
             pingIcons.localScale *= PermaPingsConfig.permaPingSize.Value / 100;
