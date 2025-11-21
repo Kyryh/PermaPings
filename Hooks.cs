@@ -16,7 +16,8 @@ namespace PermaPings {
         public static void Init() {
             On.RoR2.PlayerCharacterMasterController.Update += PlayerCharacterMasterController_Update;
             Stage.onServerStageComplete += PermaPingerController.ResetPings;
-            IL.RoR2.UI.PingIndicator.Update += PingIndicator_Update;
+            IL.RoR2.UI.PingIndicator.Update += IL_PingIndicator_Update;
+            On.RoR2.UI.PingIndicator.Update += PingIndicator_Update;
 
             //On.RoR2.UI.PingIndicator.Update += PingIndicator_Update;
 
@@ -26,7 +27,14 @@ namespace PermaPings {
 
         }
 
-        private static void PingIndicator_Update(ILContext il) {
+        private static void PingIndicator_Update(On.RoR2.UI.PingIndicator.orig_Update orig, PingIndicator self) {
+            orig(self);
+            if (self.pingTarget && self.pingTarget.TryGetComponent<BarrelInteraction>(out var barrel) && barrel.opened) {
+                self.DestroyPing();
+            }
+        }
+
+        private static void IL_PingIndicator_Update(ILContext il) {
             var c = new ILCursor(il);
 
             ILLabel label = null;
